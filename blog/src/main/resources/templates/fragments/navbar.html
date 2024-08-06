@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Thymeleaf Navbar Example</title>
+    <title>Blog Navbar</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 
+        <div th:fragment="navbar(activeLink)">
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/}">MyApp</a>
+    <a class="navbar-brand" th:href="@{/}">Blog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item" th:classappend="${page == 'home' ? 'active' : ''}">
-                <a class="nav-link" th:href="@{/}">Home</a>
             </li>
-            <li class="nav-item" th:classappend="${page == 'about' ? 'active' : ''}">
-                <a class="nav-link" th:href="@{/about}">About</a>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <div class="form-inline my-2 my-lg-0 border px-3">
+                    <div class="logged-user"
+                         text="Welcome, Gosho"></div>
+                    <form th:method="post"
+                          th:action="@{/users/logout}">
+                        <input class="btn btn-link" type="submit" value="Logout"/>
+                    </form>
+                </div>
             </li>
-            <li class="nav-item" th:classappend="${page == 'services' ? 'active' : ''}">
-                <a class="nav-link" th:href="@{/services}">Services</a>
+
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" href="/users/register"
+                   th:classappend="${activeLink == 'register'}? 'active'">Register</a>
             </li>
-            <li class="nav-item" th:classappend="${page == 'contact' ? 'active' : ''}">
-                <a class="nav-link" th:href="@{/contact}">Contact</a>
-            </li>
-            <li class="nav-item" th:if="${user != null}">
-                <a class="nav-link" th:href="@{/profile}">Profile</a>
-            </li>
-            <li class="nav-item" th:if="${user == null}">
-                <a class="nav-link" th:href="@{/login}">Login</a>
+            <li class="nav-item" sec:authorize=="!isAuthenticated()">
+                <a class="nav-link" href="/users/login"
+                   th:classappend="${activeLink == 'login'}? 'active'">
+                    Login
+                </a>
             </li>
         </ul>
     </div>

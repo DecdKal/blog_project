@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
