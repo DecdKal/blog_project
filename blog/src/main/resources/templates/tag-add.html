@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog Post Tag</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'tags-add'})}"></div>
+
+<div class="container">
+    <h2 class="mt-5">Add a New Tag</h2>
+    <form th:action="@{/tags/add}" th:method="post">
+        <div class="form-group">
+            <label for="name">Tag Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter tag name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Tag</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

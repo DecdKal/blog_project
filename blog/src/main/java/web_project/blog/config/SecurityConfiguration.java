@@ -21,6 +21,8 @@ public class SecurityConfiguration {
                                 authorizeRequests
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                         .requestMatchers("/", "/users/login", "/users/register", "/error").permitAll()
+                                        .requestMatchers("/tags/add", "/categories/add").hasAuthority("ROLE_ADMIN")
+                                        //.requestMatchers("/posts/create", "/posts/update").hasAnyAuthority()
                                         .anyRequest()
                                         .authenticated()
                 )

@@ -30,6 +30,18 @@ public class PostEntity {
     @OneToMany
     private List<TagEntity> tags;
 
+    @OneToMany
+    private List<CategoryEntity> categories;
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public PostEntity setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
