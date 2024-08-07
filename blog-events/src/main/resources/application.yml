@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/blog?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    url: "jdbc:mysql://localhost:3306/events?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: ${db_username:root}
     password: ${db_password:1234}
   sql:
@@ -24,13 +24,6 @@ spring:
   #api-key:
   #api-secret:
   #cloud-name:
-  thymeleaf: # Thymeleaf
-    cache: false
-    mode: HTML
-    encoding: UTF-8
-    prefix: file:src/main/resources/templates/
-  mvc:
-    log-request-details: true
   web:
     resources:
       static-locations: file:src/main/resources/static/
@@ -51,3 +44,4 @@ jwt:
 server:
   error:
     include-stacktrace: always
+  port: 8081
