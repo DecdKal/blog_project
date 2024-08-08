@@ -1,11 +1,22 @@
 package project.blog.events.model.dto;
 
 public class EventDTO {
+    private Long id;
+
     private String organizerEmail;
 
     private String name;
 
     private String description;
+
+    public Long getId() {
+        return id;
+    }
+
+    public EventDTO setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getOrganizerEmail() {
         return organizerEmail;
