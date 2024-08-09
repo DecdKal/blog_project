@@ -110,4 +110,12 @@ public class UserEntity {
         return this;
     }
 
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public UserEntity setUuid(UUID uuid) {
+        this.uuid = uuid;
+        return this;
+    }
 }
