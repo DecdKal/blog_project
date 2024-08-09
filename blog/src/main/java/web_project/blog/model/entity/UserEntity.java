@@ -2,9 +2,12 @@ package web_project.blog.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import org.hibernate.annotations.JdbcTypeCode;
 
 import java.util.List;
 import java.util.UUID;
+
+import static org.hibernate.type.SqlTypes.VARCHAR;
 
 @Entity
 @Table(name = "users")
@@ -20,6 +23,10 @@ public class UserEntity {
     @Column(unique = true)
     @Email
     private String email;
+
+    @UUIDSequence
+    @JdbcTypeCode(VARCHAR)
+    private UUID uuid;
 
     private String password;
 
