@@ -1,6 +1,8 @@
 package project.blog.events.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import project.blog.events.model.dto.AddEventDTO;
 import project.blog.events.model.dto.EventDTO;
@@ -23,13 +25,19 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void createEvent(AddEventDTO addEventDTO) {
-        eventRepository.save(map(addEventDTO));
+    public EventDTO createEvent(AddEventDTO addEventDTO) {
+        EventEntity eventEntity = eventRepository.save(map(addEventDTO));
+
+        return modelMapper.map(eventEntity, EventDTO.class);
     }
 
     @Override
     public List<EventDTO> getAllEvents() {
-        return eventRepository.findAll().stream().map(event -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        return eventRepository
+                .findAll()
+                .stream()
+                .map(event ->
+                        modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
     }
 
     @Override

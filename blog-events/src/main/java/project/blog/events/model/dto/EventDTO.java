@@ -1,13 +1,15 @@
 package project.blog.events.model.dto;
 
 public class EventDTO {
-    private Long id;
+        private Long id;
 
-    private String organizerEmail;
+        private String organizerEmail;
 
-    private String name;
+        private String name;
 
-    private String description;
+        private String description;
+
+    public EventDTO() {}
 
     public Long getId() {
         return id;

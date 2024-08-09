@@ -31,12 +31,14 @@ public class RestConfig {
                     .getCurrentUser()
                     .ifPresent(mud -> {
                         String bearerToken = jwtService.generateToken(
-                                mud.getUuid().toString(),//
+                                mud.getUuid().toString(),
                                 Map.of(
                                         "roles",
                                         mud.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
                                 )
                         );
+                        System.out.println("Bearer token: " + bearerToken);
+
                         r.getHeaders().setBearerAuth(bearerToken);
                     });
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Events</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'events'})}"></div>
+
+<div class="container mt-5">
+    <h2>Event List</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Organizer Email</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through the events list -->
+        <tr th:each="event : ${events}">
+            <td th:text="${event.organizerEmail}"></td>
+            <td th:text="${event.name}"></td>
+            <td th:text="${event.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

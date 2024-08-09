@@ -25,6 +25,13 @@
                     Add Event
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/events/all"
+                   sec:authorize="isAuthenticated()"
+                   th:classappend="${activeLink == 'events'}? 'active'">
+                    All Events
+                </a>
+            </li>
             <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                 Logged user: <span sec:authentication="name">Bob</span>
                 Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>

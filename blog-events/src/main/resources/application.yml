@@ -36,10 +36,10 @@ logging:
     org.hibernate.orm.jdbc.bind: TRACE
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
+    org.springframework.security.web: DEBUG
 
 jwt:
   secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
-  expiration: ${JWT_EXPIRATION:60000}
 
 server:
   error:
