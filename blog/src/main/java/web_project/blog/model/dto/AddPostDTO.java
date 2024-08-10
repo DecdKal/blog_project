@@ -25,9 +25,9 @@ public class AddPostDTO {
 
     private List<CommentEntity> comments;
 
-    private List<TagEntity> tags;
+    private List<Long> tags;
 
-    private List<CategoryEntity> categories;
+    private List<Long> categories;
 
     public String getTitle() {
         return title;
@@ -83,20 +83,20 @@ public class AddPostDTO {
         return this;
     }
 
-    public List<TagEntity> getTags() {
+    public List<Long> getTags() {
         return tags;
     }
 
-    public AddPostDTO setTags(List<TagEntity> tags) {
+    public AddPostDTO setTags(List<Long> tags) {
         this.tags = tags;
         return this;
     }
 
-    public List<CategoryEntity> getCategories() {
+    public List<Long> getCategories() {
         return categories;
     }
 
-    public AddPostDTO setCategories(List<CategoryEntity> categories) {
+    public AddPostDTO setCategories(List<Long> categories) {
         this.categories = categories;
         return this;
     }

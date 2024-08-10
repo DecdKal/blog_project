@@ -37,7 +37,7 @@
             </button>
             <div class="dropdown-checkbox-content">
                 <label th:each="tag : ${tags}">
-                    <input type="checkbox" name="tags" th:value="${tag}" th:text="${tag.getName()}"/>
+                    <input type="checkbox" name="tags" th:value="${tag.getId()}" th:text="${tag.name}"/>
                 </label>
             </div>
         </div>
@@ -52,7 +52,7 @@
             </button>
             <div class="dropdown-checkbox-content">
                 <label th:each="category : ${categories}">
-                    <input type="checkbox" name="categories" th:value="${category}" th:text="${category.getName()}"/>
+                    <input type="checkbox" name="categories" th:value="${category.getId()}" th:text="${category.name}"/>
                 </label>
             </div>
         </div>

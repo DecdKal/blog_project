@@ -28,6 +28,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<CategoryEntity> getByIds(List<Long> ids) {
+        return categoryRepository.findByIdIn(ids);
+    }
+
+    @Override
     public void add(CategoryDTO categoryDTO) {
         categoryRepository.save(map(categoryDTO));
     }

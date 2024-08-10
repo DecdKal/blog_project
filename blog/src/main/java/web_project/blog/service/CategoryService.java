@@ -10,4 +10,6 @@ public interface CategoryService {
     void add(CategoryDTO categoryDTO);
 
     List<CategoryEntity> getAll();
+
+    List<CategoryEntity> getByIds(List<Long> ids);
 }

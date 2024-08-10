@@ -32,6 +32,11 @@ public class TagServiceImpl implements TagService {
         return tagRepository.findAll();
     }
 
+    @Override
+    public List<TagEntity> getByIds(List<Long> ids) {
+        return tagRepository.findByIdIn(ids);
+    }
+
     private TagEntity map(TagDTO tagDTO) {
         return modelMapper.map(tagDTO, TagEntity.class);
     }

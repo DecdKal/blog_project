@@ -10,4 +10,6 @@ public interface TagService {
     void add(TagDTO tagDTO);
 
     List<TagEntity> getAll();
+
+    List<TagEntity> getByIds(List<Long> ids);
 }
