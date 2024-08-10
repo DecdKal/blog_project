@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import web_project.blog.model.dto.AddPostDTO;
 import web_project.blog.model.entity.CategoryEntity;
-import web_project.blog.model.entity.PostEntity;
 import web_project.blog.model.entity.TagEntity;
 import web_project.blog.model.user.PUserDetails;
 import web_project.blog.service.CategoryService;
@@ -17,7 +16,6 @@ import web_project.blog.service.TagService;
 import web_project.blog.service.UserService;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -37,7 +35,7 @@ public class PostController {
     }
 
     @GetMapping("/all")
-    public String getAllPosts(Model model) {
+    public String getAllPosts() {
         return "posts";
     }
 
@@ -56,5 +54,4 @@ public class PostController {
 
         return "redirect:/";
     }
-
 }
