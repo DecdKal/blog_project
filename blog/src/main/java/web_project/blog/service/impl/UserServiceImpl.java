@@ -46,6 +46,11 @@ public class UserServiceImpl implements UserService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<UserEntity> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     private UserEntity map(RegistrationDTO registrationDTO) {
         UserEntity mappedEntity = modelMapper.map(registrationDTO, UserEntity.class);
 

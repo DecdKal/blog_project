@@ -9,6 +9,8 @@ import web_project.blog.model.entity.TagEntity;
 import web_project.blog.repository.CategoryRepository;
 import web_project.blog.service.CategoryService;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -18,6 +20,11 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryServiceImpl(CategoryRepository categoryRepository, ModelMapper modelMapper) {
         this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public List<CategoryEntity> getAll() {
+        return categoryRepository.findAll();
     }
 
     @Override

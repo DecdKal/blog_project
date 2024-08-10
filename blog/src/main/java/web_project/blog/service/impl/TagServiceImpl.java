@@ -9,6 +9,8 @@ import web_project.blog.model.entity.UserEntity;
 import web_project.blog.repository.TagRepository;
 import web_project.blog.service.TagService;
 
+import java.util.List;
+
 @Service
 public class TagServiceImpl implements TagService {
 
@@ -23,6 +25,11 @@ public class TagServiceImpl implements TagService {
     @Override
     public void add(TagDTO tagDTO) {
         tagRepository.save(map(tagDTO));
+    }
+
+    @Override
+    public List<TagEntity> getAll() {
+        return tagRepository.findAll();
     }
 
     private TagEntity map(TagDTO tagDTO) {
