@@ -31,6 +31,9 @@ spring:
     prefix: file:src/main/resources/templates/
   mvc:
     log-request-details: true
+    hiddenmethod:
+      filter:
+        enabled: true
   web:
     resources:
       static-locations: file:src/main/resources/static/

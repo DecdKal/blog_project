@@ -1,12 +1,11 @@
 package web_project.blog.web;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import web_project.blog.model.dto.AddEventDTO;
+import web_project.blog.model.dto.EventSummaryDTO;
 import web_project.blog.service.EventService;
 
 @Controller
@@ -45,5 +44,30 @@ public class EventController {
         eventService.createEvent(addEventDTO);
 
         return "redirect:/";
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @Transactional
+    public String deleteEvent(@PathVariable("id") Long id) {
+
+        eventService.deleteEvent(id);
+
+        return "redirect:/events/all";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateEventForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("event", eventService.getEventDetails(id));
+
+        return "event-update";
+    }
+
+    @PatchMapping(path = "/update/{id}")
+    @Transactional
+    public String patchEvent(@PathVariable("id") Long id, @ModelAttribute EventSummaryDTO event) {
+
+        eventService.patchEvent(event);
+
+        return "redirect:/events/all";
     }
 }

@@ -95,5 +95,11 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<EventDTO> patchEvent (@PathVariable("id") Long id, @RequestBody EventDTO eventDTO) {
+        eventService.patchEvent(eventDTO);
+
+        return ResponseEntity.ok().build();
+    }
 
 }

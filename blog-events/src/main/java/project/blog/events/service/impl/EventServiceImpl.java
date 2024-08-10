@@ -11,6 +11,7 @@ import project.blog.events.repository.EventRepository;
 import project.blog.events.service.EventService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,19 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEvent(Long eventId) {
         eventRepository.deleteById(eventId);
+    }
+
+    @Override
+    public EventDTO patchEvent(EventDTO eventDTO) {
+        Optional<EventEntity> dbEntity = eventRepository.findById(eventDTO.getId());
+
+        if(dbEntity.isPresent()) {
+            EventEntity updatedEntity = dbEntity.get();
+            updatedEntity.setName(eventDTO.getName());
+            updatedEntity.setDescription(eventDTO.getDescription());
+            eventRepository.save(updatedEntity);
+        }
+        return eventDTO;
     }
 
     @Override

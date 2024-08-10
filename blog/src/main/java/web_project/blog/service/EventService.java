@@ -12,4 +12,8 @@ public interface EventService {
     public List<EventSummaryDTO> getAllEventsSummary();
 
     public EventSummaryDTO getEventDetails(Long id);
+
+    void deleteEvent(Long id);
+
+    void patchEvent(EventSummaryDTO summaryDTO);
 }

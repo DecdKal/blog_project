@@ -13,5 +13,7 @@ public interface EventService {
 
     void deleteEvent(Long eventId);
 
+    EventDTO patchEvent(EventDTO eventDTO);
+
     EventDTO getEventById(Long eventId);
 }

@@ -18,7 +18,23 @@
                 <strong>Organizer Email:</strong> <span th:text="${event.organizerEmail}">organizer@example.com</span><br>
                 <strong>Description:</strong> <span th:text="${event.description}">This is a detailed description of the event.</span>
             </p>
-            <a href="/events" class="btn btn-primary">Back to Events List</a>
+            <div class="btn-group" role="group" aria-label="Event actions">
+                <!-- Update button -->
+                <a th:href="@{/events/update/{id}(id=${event.id})}"
+                   class="btn btn-warning">Update</a>
+
+                <!-- Delete button -->
+                <form th:action="@{/events/{id}(id=${event.id})}"
+                      method="post"
+                      th:onsubmit="return confirm('Are you sure you want to delete this event?');"
+                      style="display:inline;">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+
+                <!-- Back to events list button -->
+                <a href="/events/all" class="btn btn-primary">Back to Events List</a>
+            </div>
         </div>
     </div>
 </div>

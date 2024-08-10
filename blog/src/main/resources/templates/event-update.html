@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Event</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'event-update'})}"></div>
+
+<div class="container mt-5">
+    <h2>Edit Event</h2>
+    <form th:action="@{/events/update/{id}(id=${event.id})}" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <div class="form-group">
+            <label for="name">Event Name:</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${event.name}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" required
+                      th:text="${event.description}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Update Event</button>
+    </form>
+</div>
+
+</body>
+</html>
