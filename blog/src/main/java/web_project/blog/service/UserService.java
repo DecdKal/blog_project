@@ -1,6 +1,7 @@
 package web_project.blog.service;
 
 import web_project.blog.model.dto.RegistrationDTO;
+import web_project.blog.model.dto.UserProfileDTO;
 import web_project.blog.model.entity.UserEntity;
 import web_project.blog.model.user.PUserDetails;
 
@@ -13,4 +14,8 @@ public interface UserService {
     Optional<PUserDetails> getCurrentUser();
 
     Optional<UserEntity> getUserByEmail(String email);
+
+    UserProfileDTO getUserByEmailAndMapToDTO(String email);
+
+
 }

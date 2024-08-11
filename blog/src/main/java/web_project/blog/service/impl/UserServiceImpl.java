@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web_project.blog.model.dto.RegistrationDTO;
+import web_project.blog.model.dto.UserProfileDTO;
 import web_project.blog.model.entity.UserEntity;
 import web_project.blog.model.enums.UserRoleEnum;
 import web_project.blog.model.user.PUserDetails;
@@ -51,6 +52,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public UserProfileDTO getUserByEmailAndMapToDTO(String email) {
+        Optional<UserEntity> user = userRepository.findByEmail(email);
+        return user.map(this::map).orElse(null);
+    }
+
     private UserEntity map(RegistrationDTO registrationDTO) {
         UserEntity mappedEntity = modelMapper.map(registrationDTO, UserEntity.class);
 
@@ -58,5 +65,9 @@ public class UserServiceImpl implements UserService {
         mappedEntity.setRoles(List.of(roleRepository.getUserRoleEntityByName(UserRoleEnum.USER)));
 
         return mappedEntity;
+    }
+
+    private UserProfileDTO map(UserEntity user) {
+        return modelMapper.map(user, UserProfileDTO.class);
     }
 }

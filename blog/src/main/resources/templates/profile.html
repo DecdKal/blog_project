@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <h1>User Profile</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Profile Details</h2>
+
+        <div>
+            <label for="username">Username:</label>
+            <span th:text="${user.username}">Username</span>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <span th:text="${user.email}">Email</span>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <p th:text="${user.description}">Description</p>
+        </div>
+    </section>
+
+    <section>
+        <a href="/users/edit" class="button">Edit Profile</a>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Your Company</p>
+</footer>
+</body>
+</html>
