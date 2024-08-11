@@ -2,11 +2,9 @@ package web_project.blog.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import web_project.blog.model.dto.AddPostDTO;
+import web_project.blog.model.dto.PostSummaryDTO;
 import web_project.blog.model.entity.CategoryEntity;
 import web_project.blog.model.entity.TagEntity;
 import web_project.blog.model.user.PUserDetails;
@@ -35,7 +33,8 @@ public class PostController {
     }
 
     @GetMapping("/all")
-    public String getAllPosts() {
+    public String getAllPosts(@ModelAttribute ArrayList<PostSummaryDTO> posts, Model model) {
+        model.addAttribute("posts", postService.getAllPosts());
         return "posts";
     }
 
@@ -45,6 +44,12 @@ public class PostController {
         model.addAttribute("tags", tagService.getAll());
         model.addAttribute("categories", categoryService.getAll());
         return "post-add";
+    }
+
+    @GetMapping("/{id}")
+    public String postDetails(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("post", postService.getPostDetails(id));
+        return "post-details";
     }
 
     @PostMapping("/add")

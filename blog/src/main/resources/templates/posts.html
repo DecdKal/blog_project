@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Include the navigation bar -->
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'posts-all'})}"></div>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Blog Posts</h1>
+
+    <!-- Check if there are posts -->
+    <div th:if="${posts != null}" th:object="${posts}">
+        <!-- Loop through each post -->
+        <div th:each="post : ${posts}" class="card mb-3">
+            <div class="card-body">
+                <!-- Make the post title a hyperlink to the post details page -->
+                <h3 class="card-title">
+                    <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}">Post Title</a>
+                </h3>
+                <p class="card-text">
+                    <strong>Author:</strong> <span th:text="${post.author.getUsername()}">Author Name</span> <br>
+                    <strong>Created On:</strong> <span th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm')}">01 Jan 2024</span>
+                </p>
+                <p class="card-text">
+                    <strong>Categories:</strong>
+                    <span th:each="category : ${post.categories}" class="badge bg-secondary me-1" th:text="${category.name}">Category Name</span>
+                </p>
+                <p class="card-text">
+                    <strong>Tags:</strong>
+                    <span th:each="tag : ${post.tags}" class="badge bg-secondary me-1" th:text="${tag.name}">Tag Name</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Show message if no posts are available -->
+    <div th:if="${posts == null}">
+        <p>No posts available.</p>
+    </div>
+</div>
+</body>
+</html>

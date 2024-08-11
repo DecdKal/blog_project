@@ -3,6 +3,7 @@ package web_project.blog.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import web_project.blog.model.dto.AddPostDTO;
+import web_project.blog.model.dto.PostSummaryDTO;
 import web_project.blog.model.entity.CategoryEntity;
 import web_project.blog.model.entity.PostEntity;
 import web_project.blog.model.entity.TagEntity;
@@ -41,11 +42,21 @@ public class PostServiceImpl implements PostService {
         this.postRepository.save(map(addPostDTO,userDetails));
     }
 
+    @Override
+    public List<PostSummaryDTO> getAllPosts() {
+        return postRepository.findAll().stream().map(p -> modelMapper.map(p, PostSummaryDTO.class)).toList();
+    }
+
+    @Override
+    public PostSummaryDTO getPostDetails(Long id) {
+        return modelMapper.map(postRepository.findById(id), PostSummaryDTO.class);
+    }
+
     private PostEntity map(AddPostDTO addPostDTO, PUserDetails user) {
-        PostEntity post =  modelMapper.map(addPostDTO, PostEntity.class);
+        PostEntity post = modelMapper.map(addPostDTO, PostEntity.class);
         Optional<UserEntity> userEntity = userService.getUserByEmail(user.getUsername());
 
-        if(userEntity.isPresent()) {
+        if (userEntity.isPresent()) {
             post.setCreatedOn(LocalDateTime.now());
             post.setLastUpdatedOn(LocalDateTime.now());
             post.setAuthor(userEntity.get());

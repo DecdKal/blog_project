@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Include the navigation bar -->
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'post-details'})}"></div>
+
+<div class="container mt-5">
+    <!-- Post Title -->
+    <h1 class="mb-4" th:text="${post.title}">Post Title</h1>
+
+    <!-- Post Metadata (Author, Created On, Categories, Tags) -->
+    <div class="mb-4">
+        <p>
+            <strong>Author:</strong> <span th:text="${post.author.getUsername()}">Author Name</span><br>
+            <strong>Created On:</strong> <span th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm')}">01 Jan 2024</span>
+        </p>
+        <p>
+            <strong>Categories:</strong>
+            <span th:each="category : ${post.categories}" class="badge bg-secondary me-1" th:text="${category.name}">Category Name</span>
+        </p>
+        <p>
+            <strong>Tags:</strong>
+            <span th:each="tag : ${post.tags}" class="badge bg-secondary me-1" th:text="${tag.name}">Tag Name</span>
+        </p>
+    </div>
+
+    <!-- Post Content -->
+    <div class="mb-5">
+        <p th:text="${post.content}">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between">
+        <!-- Button to go back to the list of posts -->
+        <a class="btn btn-primary" th:href="@{/posts/all}" role="button">Back to Posts</a>
+
+        <div>
+            <a class="btn btn-warning" th:href="@{/posts/edit/{id}(id=${post.id})}" role="button">Edit Post</a>
+            <a class="btn btn-danger" th:href="@{/posts/delete/{id}(id=${post.id})}" role="button" onclick="return confirm('Are you sure you want to delete this post?');">Delete Post</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

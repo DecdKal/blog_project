@@ -32,6 +32,20 @@
                     All Events
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts/all"
+                   sec:authorize="isAuthenticated()"
+                   th:classappend="${activeLink == 'posts-all'}? 'active'">
+                    All Posts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts/add"
+                   sec:authorize="isAuthenticated()"
+                   th:classappend="${activeLink == 'posts-add'}? 'active'">
+                    Add Post
+                </a>
+            </li>
             <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                 Logged user: <span sec:authentication="name">Bob</span>
                 Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
