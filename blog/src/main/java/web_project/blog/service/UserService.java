@@ -1,5 +1,6 @@
 package web_project.blog.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import web_project.blog.model.dto.RegistrationDTO;
 import web_project.blog.model.dto.UserProfileDTO;
 import web_project.blog.model.entity.UserEntity;
@@ -16,6 +17,8 @@ public interface UserService {
     Optional<UserEntity> getUserByEmail(String email);
 
     UserProfileDTO getUserByEmailAndMapToDTO(String email);
+
+    void updateUser(UserProfileDTO userProfileDTO, UserDetails userDetails);
 
 
 }

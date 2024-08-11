@@ -3,6 +3,7 @@ package web_project.blog.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web_project.blog.model.dto.RegistrationDTO;
@@ -15,6 +16,7 @@ import web_project.blog.repository.UserRepository;
 import web_project.blog.service.UserService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -56,6 +58,17 @@ public class UserServiceImpl implements UserService {
     public UserProfileDTO getUserByEmailAndMapToDTO(String email) {
         Optional<UserEntity> user = userRepository.findByEmail(email);
         return user.map(this::map).orElse(null);
+    }
+
+    @Override
+    public void updateUser(UserProfileDTO userProfileDTO, UserDetails userDetails) {
+        if(Objects.equals(userDetails.getUsername(), userProfileDTO.getEmail())) {
+            Optional<UserEntity> user = userRepository.findByEmail(userDetails.getUsername());
+            if(user.isPresent()) {
+                user.get().setUsername(userProfileDTO.getUsername());
+                userRepository.save(user.get());
+            }
+        }
     }
 
     private UserEntity map(RegistrationDTO registrationDTO) {
