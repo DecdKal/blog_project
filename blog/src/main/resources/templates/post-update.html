@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<!-- Include the navigation bar -->
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'posts-edit'})}"></div>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Update Post</h1>
+
+    <!-- Update Post Form -->
+    <form th:action="@{/posts/update/{id}(id=${post.id})}" th:object="${post}" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <!-- Post Title -->
+        <div class="form-group mb-3">
+            <label for="title">New Title</label>
+            <input type="text" id="title" class="form-control" th:field="*{title}" placeholder="Edit post title">
+        </div>
+
+        <!-- Post Categories (Multi-Select) -->
+        <div class="form-group">
+            <label for="tags">New Tags:</label>
+            <div class="dropdown-checkbox" id="tagsDropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button">
+                    Select New Tags
+                </button>
+                <div class="dropdown-checkbox-content">
+                    <label th:each="tag : ${tags}">
+                        <input type="checkbox" name="tags" th:value="${tag.getId()}" th:text="${tag.name}"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="form-group">
+            <label for="categories">New Categories:</label>
+            <div class="dropdown-checkbox" id="categoriesDropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button">
+                    Select New Categories
+                </button>
+                <div class="dropdown-checkbox-content">
+                    <label th:each="category : ${categories}">
+                        <input type="checkbox" name="categories" th:value="${category.getId()}" th:text="${category.name}"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Content -->
+        <div class="form-group mb-4">
+            <label for="content">New Content</label>
+            <textarea id="content" class="form-control" th:field="*{content}" rows="10" placeholder="Enter post content"></textarea>
+        </div>
+
+        <!-- Form Buttons -->
+        <div class="d-flex justify-content-between">
+            <a class="btn btn-secondary" th:href="@{/posts}" role="button">Cancel</a>
+            <button type="submit" class="btn btn-primary">Update Post</button>
+        </div>
+    </form>
+    <script>
+        document.querySelectorAll('.dropdown-checkbox').forEach(function(dropdown) {
+            const button = dropdown.querySelector('.btn');
+            const content = dropdown.querySelector('.dropdown-checkbox-content');
+            const inputs = content.querySelectorAll('input[type="checkbox"]');
+            const defaultButtonText = button.textContent;
+
+            button.addEventListener('click', function(event) {
+                dropdown.classList.toggle('active');
+                event.stopPropagation(); // Prevents closing when clicking the button
+            });
+
+            document.addEventListener('click', function() {
+                dropdown.classList.remove('active');
+            });
+
+            dropdown.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevents closing when clicking inside the dropdown
+            });
+
+            inputs.forEach(function(input) {
+                input.addEventListener('change', function() {
+                    const selected = Array.from(inputs).filter(i => i.checked).map(i => i.nextSibling.textContent.trim());
+                    if (selected.length > 0) {
+                        button.textContent = selected.join(', ');
+                    } else {
+                        button.textContent = defaultButtonText;
+                    }
+                });
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

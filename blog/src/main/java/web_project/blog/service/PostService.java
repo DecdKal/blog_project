@@ -13,4 +13,8 @@ public interface PostService {
     List<PostSummaryDTO> getAllPosts();
 
     PostSummaryDTO getPostDetails(Long id);
+
+    void deletePost(Long id);
+
+    void updatePost(PostSummaryDTO postSummaryDTO, PUserDetails userDetails);
 }

@@ -41,8 +41,15 @@
         <a class="btn btn-primary" th:href="@{/posts/all}" role="button">Back to Posts</a>
 
         <div>
-            <a class="btn btn-warning" th:href="@{/posts/edit/{id}(id=${post.id})}" role="button">Edit Post</a>
-            <a class="btn btn-danger" th:href="@{/posts/delete/{id}(id=${post.id})}" role="button" onclick="return confirm('Are you sure you want to delete this post?');">Delete Post</a>
+            <a class="btn btn-warning" th:href="@{/posts/update/{id}(id=${post.id})}" role="button">Edit Post</a>
+            <form th:action="@{/posts/{id}(id=${post.id})}"
+                  method="post"
+                  th:onsubmit="return confirm('Are you sure you want to delete this post?');"
+                  style="display:inline;">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger">Delete Post</button>
+            </form>
+
         </div>
     </div>
 </div>

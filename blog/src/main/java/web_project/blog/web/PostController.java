@@ -52,11 +52,36 @@ public class PostController {
         return "post-details";
     }
 
+    @GetMapping("/update/{id}")
+    public String updatePost(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("post", postService.getPostDetails(id));
+        model.addAttribute("tags", tagService.getAll());
+        model.addAttribute("categories", categoryService.getAll());
+        return "post-update";
+    }
+
     @PostMapping("/add")
     public String addPost(AddPostDTO addPostDTO) {
         Optional<PUserDetails> user = userService.getCurrentUser();
         user.ifPresent(userDetails -> postService.createPost(addPostDTO, userDetails));
 
         return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePost(@PathVariable("id") Long id) {
+        Optional<PUserDetails> user = userService.getCurrentUser();
+        user.ifPresent(userDetails -> postService.deletePost(id));
+
+        return "redirect:/posts/all";
+    }
+
+    @PatchMapping("/update/{id}")
+    public String updatePost(@PathVariable("id") Long id, @ModelAttribute PostSummaryDTO post) {
+        Optional<PUserDetails> user = userService.getCurrentUser();
+        user.ifPresent(userDetails -> postService.updatePost(post, userDetails));
+
+
+        return "redirect:/posts/all";
     }
 }

@@ -52,6 +52,22 @@ public class PostServiceImpl implements PostService {
         return modelMapper.map(postRepository.findById(id), PostSummaryDTO.class);
     }
 
+    @Override
+    public void deletePost(Long id) {
+        Optional<PostEntity> post = postRepository.findById(id);
+
+        post.ifPresent(postRepository::delete);
+    }
+
+    @Override
+    public void updatePost(PostSummaryDTO postSummaryDTO, PUserDetails userDetails) {
+        PostEntity updatedPost = map(postSummaryDTO);
+
+        if(updatedPost != null) {
+            this.postRepository.save(updatedPost);
+        }
+    }
+
     private PostEntity map(AddPostDTO addPostDTO, PUserDetails user) {
         PostEntity post = modelMapper.map(addPostDTO, PostEntity.class);
         Optional<UserEntity> userEntity = userService.getUserByEmail(user.getUsername());
@@ -68,5 +84,20 @@ public class PostServiceImpl implements PostService {
             post.setTags(tags);
         }
         return post;
+    }
+
+    private PostEntity map(PostSummaryDTO postSummaryDTO) {
+        Optional<PostEntity> post = postRepository.findById(postSummaryDTO.getId());
+
+        if(post.isPresent()) {
+            PostEntity updatedPost = post.get();
+            updatedPost.setTitle(postSummaryDTO.getTitle());
+            updatedPost.setContent(postSummaryDTO.getContent());
+            updatedPost.setTags(postSummaryDTO.getTags());
+            updatedPost.setCategories(postSummaryDTO.getCategories());
+            updatedPost.setLastUpdatedOn(LocalDateTime.now());
+            return updatedPost;
+        }
+        return null;
     }
 }
