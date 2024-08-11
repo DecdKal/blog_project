@@ -24,9 +24,6 @@ public class PostEntity {
 
     private LocalDateTime lastUpdatedOn;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CommentEntity> comments;
-
     @OneToMany
     private List<TagEntity> tags;
 
@@ -104,14 +101,4 @@ public class PostEntity {
         this.tags = tags;
         return this;
     }
-
-    public List<CommentEntity> getComments() {
-        return comments;
-    }
-
-    public PostEntity setComments(List<CommentEntity> comments) {
-        this.comments = comments;
-        return this;
-    }
-
 }

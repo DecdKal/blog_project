@@ -1,11 +1,5 @@
 package web_project.blog.model.dto;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import web_project.blog.model.entity.CategoryEntity;
-import web_project.blog.model.entity.CommentEntity;
-import web_project.blog.model.entity.TagEntity;
 import web_project.blog.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
@@ -22,8 +16,6 @@ public class AddPostDTO {
     private LocalDateTime createdOn;
 
     private LocalDateTime lastUpdatedOn;
-
-    private List<CommentEntity> comments;
 
     private List<Long> tags;
 
@@ -71,15 +63,6 @@ public class AddPostDTO {
 
     public AddPostDTO setLastUpdatedOn(LocalDateTime lastUpdatedOn) {
         this.lastUpdatedOn = lastUpdatedOn;
-        return this;
-    }
-
-    public List<CommentEntity> getComments() {
-        return comments;
-    }
-
-    public AddPostDTO setComments(List<CommentEntity> comments) {
-        this.comments = comments;
         return this;
     }
 

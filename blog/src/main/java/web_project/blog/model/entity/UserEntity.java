@@ -39,9 +39,6 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<UserRoleEntity> roles;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CommentEntity> comments;
-
     public Long getId() {
         return id;
     }
@@ -98,15 +95,6 @@ public class UserEntity {
 
     public UserEntity addRole(UserRoleEntity role) {
         this.roles.add(role);
-        return this;
-    }
-
-    public List<CommentEntity> getComments() {
-        return comments;
-    }
-
-    public UserEntity setComments(List<CommentEntity> comments) {
-        this.comments = comments;
         return this;
     }
 

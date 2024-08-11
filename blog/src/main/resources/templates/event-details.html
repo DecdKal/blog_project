@@ -17,6 +17,8 @@
             <p class="card-text">
                 <strong>Organizer Email:</strong> <span th:text="${event.organizerEmail}">organizer@example.com</span><br>
                 <strong>Description:</strong> <span th:text="${event.description}">This is a detailed description of the event.</span>
+                <br>
+                <strong>Date and Time of Event:</strong> <span th:text="${event.dateAndTime()}">Time and date of the event.</span>
             </p>
             <div class="btn-group" role="group" aria-label="Event actions">
                 <!-- Update button -->

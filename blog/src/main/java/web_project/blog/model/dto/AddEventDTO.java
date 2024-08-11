@@ -1,11 +1,37 @@
 package web_project.blog.model.dto;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+
 public class AddEventDTO {
     private String organizerEmail;
 
     private String name;
 
     private String description;
+
+    private LocalDate date;
+
+    private LocalTime time;
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public AddEventDTO setTime(LocalTime time) {
+        this.time = time;
+        return this;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public AddEventDTO setDate(LocalDate date) {
+        this.date = date;
+        return this;
+    }
 
     public String getOrganizerEmail() {
         return organizerEmail;
