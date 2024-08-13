@@ -1,10 +1,14 @@
 package web_project.blog.web;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web_project.blog.model.dto.AddEventDTO;
+import web_project.blog.model.dto.CategoryDTO;
 import web_project.blog.model.dto.EventSummaryDTO;
 import web_project.blog.service.EventService;
 
@@ -35,14 +39,21 @@ public class EventController {
     }
 
     @GetMapping("/add")
-    public String newEvent() {
+    public String addEvent(Model model) {
+        if (!model.containsAttribute("addEventDTO")) {
+            model.addAttribute("addEventDTO", AddEventDTO.empty());
+        }
         return "event-add";
     }
 
     @PostMapping("/add")
-    public String addEvent(AddEventDTO addEventDTO) {
+    public String addEvent(@Valid AddEventDTO addEventDTO, BindingResult bindingResult, RedirectAttributes rAtt) {
+        if(bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("addEventDTO", addEventDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addEventDTO", bindingResult);
+            return "redirect:/events/add";
+        }
         eventService.createEvent(addEventDTO);
-
         return "redirect:/";
     }
 

@@ -2,6 +2,7 @@ package web_project.blog.model.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import web_project.blog.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
@@ -9,10 +10,12 @@ import java.util.List;
 
 public class AddPostDTO {
 
-    @NotEmpty
+    @NotEmpty(message = "Title cannot be empty.")
+    @Size(min = 5, message = "Title must be longer than 5 letters.")
     private String title;
 
-    @NotEmpty
+    @NotEmpty(message = "Content cannot be empty.")
+    @Size(min = 5, message = "Content must be longer than 5 letters.")
     private String content;
 
     @NotNull

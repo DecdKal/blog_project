@@ -10,22 +10,34 @@
 <body>
 <div class="container">
     <h2 class="mt-5">Add a New Blog Event</h2>
-    <form th:action="@{/events/add}" th:method="post">
+    <form th:action="@{/events/add}" th:method="post" th:object="${addEventDTO}">
         <div class="form-group">
             <label for="name">Event Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter event name" required>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter event name" th:errorclass="is-invalid" th:field="*{name}">
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}" class="text-danger">Name error
+            </small>
         </div>
         <div class="form-group">
             <label for="description">Event Description</label>
-            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter event description" required></textarea>
+            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter event description" th:errorclass="is-invalid" th:field="*{description}"></textarea>
+            <small th:if="${#fields.hasErrors('description')}"
+                   th:errors="*{description}" class="text-danger">Description error
+            </small>
         </div>
         <div class="form-group">
             <label for="date">Event Date</label>
-            <input type="date" class="form-control" id="date" name="date" required>
+            <input type="date" class="form-control" id="date" name="date" th:errorclass="is-invalid" th:field="*{date}">
+            <small th:if="${#fields.hasErrors('date')}"
+                   th:errors="*{date}" class="text-danger">Date error
+            </small>
         </div>
         <div class="form-group">
             <label for="time">Event Time</label>
-            <input type="time" class="form-control" id="time" name="time" required>
+            <input type="time" class="form-control" id="time" name="time" th:errorclass="is-invalid" th:field="*{time}">
+            <small th:if="${#fields.hasErrors('time')}"
+                   th:errors="*{time}" class="text-danger">Time error
+            </small>
         </div>
         <button type="submit" class="btn btn-primary">Add Event</button>
     </form>

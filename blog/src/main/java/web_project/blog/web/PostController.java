@@ -1,11 +1,15 @@
 package web_project.blog.web;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web_project.blog.model.dto.AddPostDTO;
+import web_project.blog.model.dto.CategoryDTO;
 import web_project.blog.model.dto.PostSummaryDTO;
 import web_project.blog.model.entity.CategoryEntity;
 import web_project.blog.model.entity.TagEntity;
@@ -43,7 +47,9 @@ public class PostController {
 
     @GetMapping("/add")
     public String addPost(@ModelAttribute ArrayList<TagEntity> tags, @ModelAttribute ArrayList<CategoryEntity> categories, Model model) {
-        model.addAttribute("post", new AddPostDTO());
+        if (!model.containsAttribute("addPostDTO")) {
+            model.addAttribute("addPostDTO", new AddPostDTO());
+        }
         model.addAttribute("tags", tagService.getAll());
         model.addAttribute("categories", categoryService.getAll());
         return "post-add";
@@ -73,7 +79,12 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public String addPost(AddPostDTO addPostDTO) {
+    public String addPost(@Valid AddPostDTO addPostDTO, BindingResult bindingResult, RedirectAttributes rAtt) {
+        if(bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("addPostDTO", addPostDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addPostDTO", bindingResult);
+            return "redirect:/posts/add";
+        }
         Optional<PUserDetails> user = userService.getCurrentUser();
         user.ifPresent(userDetails -> postService.createPost(addPostDTO, userDetails));
 

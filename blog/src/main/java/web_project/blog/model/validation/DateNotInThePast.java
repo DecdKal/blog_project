@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = DateNotInThePastValidator.class)
 public @interface DateNotInThePast {
 
-    String message() default "Must not be in the past.";
+    String message() default "The date must be in the future.";
 
     Class<?>[] groups() default {};
 
