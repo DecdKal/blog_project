@@ -4,15 +4,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestClient;
 import web_project.blog.model.dto.AddEventDTO;
 import web_project.blog.model.dto.EventSummaryDTO;
 import web_project.blog.model.user.PUserDetails;
 import web_project.blog.service.EventService;
 import web_project.blog.service.UserService;
+import web_project.blog.service.exception.ApiObjectNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -82,5 +87,17 @@ public class EventServiceImpl implements EventService {
                 .accept(MediaType.APPLICATION_JSON)
                 .body(summaryDTO)
                 .retrieve();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ApiObjectNotFoundException.class)
+    @ResponseBody
+    public NotFoundErrorInfo handleApiObjectNotFoundException(ApiObjectNotFoundException apiObjectNotFoundException) {
+        return new NotFoundErrorInfo("NOT FOUND", apiObjectNotFoundException.getId());
+    }
+
+
+    public record NotFoundErrorInfo(String code, Object id) {
+
     }
 }

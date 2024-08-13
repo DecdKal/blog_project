@@ -1,5 +1,9 @@
 package web_project.blog.model.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import web_project.blog.model.validation.DateNotInThePast;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
@@ -7,12 +11,16 @@ import java.util.Date;
 public class AddEventDTO {
     private String organizerEmail;
 
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private String description;
 
+    @DateNotInThePast
     private LocalDate date;
 
+    @NotNull
     private LocalTime time;
 
     public LocalTime getTime() {

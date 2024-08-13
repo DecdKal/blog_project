@@ -1,11 +1,18 @@
 package web_project.blog.model.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 public class RegistrationDTO {
 
+    @NotEmpty
     private String username;
 
+    @NotEmpty
+    @Email
     private String email;
 
+    @NotEmpty
     private String password;
 
     public String getUsername() {

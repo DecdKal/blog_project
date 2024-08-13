@@ -9,6 +9,7 @@ import project.blog.events.model.dto.EventDTO;
 import project.blog.events.model.entity.EventEntity;
 import project.blog.events.repository.EventRepository;
 import project.blog.events.service.EventService;
+import project.blog.events.service.exception.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,7 @@ public class EventServiceImpl implements EventService {
     public EventDTO getEventById(Long eventId) {
         return eventRepository.findById(eventId)
                 .map(eventDTO -> modelMapper.map(eventDTO, EventDTO.class))
-                .orElseThrow(() -> new IllegalArgumentException("Such event does not exist."));
+                .orElseThrow(() -> new ObjectNotFoundException("Such event does not exist.", eventId));
 
     }
 

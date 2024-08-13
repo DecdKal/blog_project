@@ -1,8 +1,10 @@
 package web_project.blog.web;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import web_project.blog.model.dto.AddPostDTO;
 import web_project.blog.model.dto.PostSummaryDTO;
 import web_project.blog.model.entity.CategoryEntity;
@@ -12,6 +14,7 @@ import web_project.blog.service.CategoryService;
 import web_project.blog.service.PostService;
 import web_project.blog.service.TagService;
 import web_project.blog.service.UserService;
+import web_project.blog.service.exception.ObjectNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -58,6 +61,15 @@ public class PostController {
         model.addAttribute("tags", tagService.getAll());
         model.addAttribute("categories", categoryService.getAll());
         return "post-update";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ModelAndView handleObjectNotFound(ObjectNotFoundException onfe) {
+        ModelAndView modelAndView = new ModelAndView("event-not-found");
+        modelAndView.addObject("eventId", onfe.getId());
+
+        return modelAndView;
     }
 
     @PostMapping("/add")

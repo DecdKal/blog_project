@@ -60,12 +60,17 @@ public class EventController {
                                             schema = @Schema(implementation = EventDTO.class)
                                     )
                             }),
-                    @ApiResponse(responseCode = "404", description = "Event not found.")
+                    @ApiResponse(responseCode = "404", description = "Event not found.",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json"
+                            )
+                    })
             }
     )
     @GetMapping("/{id}")
     public ResponseEntity<EventDTO> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(eventService.getEventById(id));
+            return ResponseEntity.ok(eventService.getEventById(id));
     }
 
     @Operation(

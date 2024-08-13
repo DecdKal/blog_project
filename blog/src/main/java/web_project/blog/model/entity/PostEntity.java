@@ -1,6 +1,8 @@
 package web_project.blog.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,10 +15,13 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String title;
 
+    @NotEmpty
     private String content;
 
+    @NotNull
     @ManyToOne
     private UserEntity author;
 

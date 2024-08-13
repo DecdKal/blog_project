@@ -14,6 +14,7 @@ import web_project.blog.service.CategoryService;
 import web_project.blog.service.PostService;
 import web_project.blog.service.TagService;
 import web_project.blog.service.UserService;
+import web_project.blog.service.exception.ObjectNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,7 +50,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostSummaryDTO getPostDetails(Long id) {
-        return modelMapper.map(postRepository.findById(id), PostSummaryDTO.class);
+        //return modelMapper.map(postRepository.findById(id), PostSummaryDTO.class);
+
+        return this.postRepository
+                .findById(id)
+                .map(this::mapToSummary)
+                .orElseThrow(() -> new ObjectNotFoundException("Event not found!", id));
     }
 
     @Override
@@ -99,5 +105,9 @@ public class PostServiceImpl implements PostService {
             return updatedPost;
         }
         return null;
+    }
+
+    private PostSummaryDTO mapToSummary(PostEntity post) {
+        return modelMapper.map(post, PostSummaryDTO.class);
     }
 }

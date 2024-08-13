@@ -1,5 +1,7 @@
 package web_project.blog.model.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import web_project.blog.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
@@ -7,10 +9,13 @@ import java.util.List;
 
 public class AddPostDTO {
 
+    @NotEmpty
     private String title;
 
+    @NotEmpty
     private String content;
 
+    @NotNull
     private UserEntity author;
 
     private LocalDateTime createdOn;

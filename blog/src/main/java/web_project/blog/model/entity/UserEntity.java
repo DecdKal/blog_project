@@ -2,6 +2,7 @@ package web_project.blog.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.JdbcTypeCode;
 
 import java.util.List;
@@ -17,9 +18,11 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(unique = true)
     private String username;
 
+    @NotEmpty
     @Column(unique = true)
     @Email
     private String email;
@@ -28,6 +31,7 @@ public class UserEntity {
     @JdbcTypeCode(VARCHAR)
     private UUID uuid;
 
+    @NotEmpty
     private String password;
 
     private String description;

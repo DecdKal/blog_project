@@ -13,10 +13,13 @@
 
 <div class="container">
     <h2 class="mt-5">Add a New Tag</h2>
-    <form th:action="@{/tags/add}" th:method="post">
+    <form th:action="@{/tags/add}" th:method="post" th:object="${tagDTO}">
         <div class="form-group">
             <label for="name">Tag Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter tag name" required>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter tag name" th:errorclass="is-invalid" th:field="*{name}">
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}" class="text-danger">Name error
+            </small>
         </div>
         <button type="submit" class="btn btn-primary">Add Tag</button>
     </form>

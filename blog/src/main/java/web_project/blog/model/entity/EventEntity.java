@@ -3,6 +3,10 @@ package web_project.blog.model.entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import web_project.blog.model.validation.DateNotInThePast;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,14 +16,20 @@ public class EventEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Email
     private String organizerEmail;
 
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private String description;
 
+    @DateNotInThePast
     private LocalDate date;
 
+    @NotNull
     private LocalTime time;
 
     public LocalDate getDate() {
