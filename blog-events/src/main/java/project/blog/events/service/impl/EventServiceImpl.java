@@ -64,8 +64,7 @@ public class EventServiceImpl implements EventService {
     public EventDTO getEventById(Long eventId) {
         return eventRepository.findById(eventId)
                 .map(eventDTO -> modelMapper.map(eventDTO, EventDTO.class))
-                .orElseThrow(() -> new ObjectNotFoundException("Such event does not exist.", eventId));
-
+                .orElseThrow(ObjectNotFoundException::new);
     }
 
     private EventEntity map(AddEventDTO addEventDTO) {

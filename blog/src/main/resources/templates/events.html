@@ -18,6 +18,7 @@
             <th scope="col">Event Name</th>
             <th scope="col">Description</th>
             <th scope="col">Date And Time</th>
+            <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
             <td th:text="${event.name}"></td>
             <td th:text="${event.description}"></td>
             <td th:text="${event.dateAndTime()}"></td>
+            <td><a th:href="@{/events/{id}(id=${event.id})}" class="btn btn-primary">Event details</a></td>
         </tr>
         </tbody>
     </table>

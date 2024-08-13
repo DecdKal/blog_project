@@ -20,7 +20,7 @@ public class SecurityConfiguration {
                         authorizeRequests ->
                                 authorizeRequests
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                        .requestMatchers("/", "/users/login", "/users/register", "/error", "/events/{id}", "/events/all").permitAll()
+                                        .requestMatchers("/", "/users/login", "/users/register", "/error/404", "/error", "/events/{id}", "/events/all").permitAll()
                                         .requestMatchers("/tags/add", "/categories/add").hasAuthority("ROLE_ADMIN")
                                         //.requestMatchers("/posts/create", "/posts/update").hasAnyAuthority()
                                         .anyRequest()

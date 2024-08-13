@@ -10,11 +10,11 @@
 
 <body>
 
-<div th:replace="~{fragments/navbar::navbar(activeLink=${'404'})}"></div>
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'post-not-found'})}"></div>
 
 
 <div class="container-fluid">
-    <h5 class="text-center mt-5"> The resource you're looking for does not exist.</h5>
+    <h5 class="text-center mt-5"> Post with id <th:block th:text="${postId}">1</th:block> not found!</h5>
 </div>
 
 <div class="text-center mt-5"><a th:href="@{/}">Back to home page</a></div>

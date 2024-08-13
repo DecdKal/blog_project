@@ -57,4 +57,4 @@ server:
 
 events:
   api:
-    baseUrl: "http://localhost:8081"
+    baseUrl: "${EVENTS_BASE_URL:http://localhost:8081}"

@@ -53,19 +53,21 @@ public class EventController {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Event details",
+                            description = "The event details",
                             content = {
                                     @Content(
                                             mediaType = "application/json",
                                             schema = @Schema(implementation = EventDTO.class)
                                     )
-                            }),
-                    @ApiResponse(responseCode = "404", description = "Event not found.",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json"
-                            )
-                    })
+                            }
+                    ),
+                    @ApiResponse(responseCode = "404", description = "If the event was not found",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json"
+                                    )
+                            }
+                    )
             }
     )
     @GetMapping("/{id}")

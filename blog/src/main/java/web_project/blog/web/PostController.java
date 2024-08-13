@@ -55,6 +55,15 @@ public class PostController {
         return "post-add";
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ModelAndView handleObjectNotFound(ObjectNotFoundException onfe) {
+        ModelAndView modelAndView = new ModelAndView("post-not-found");
+        modelAndView.addObject("postId", onfe.getId());
+
+        return modelAndView;
+    }
+
     @GetMapping("/{id}")
     public String postDetails(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", postService.getPostDetails(id));
@@ -67,15 +76,6 @@ public class PostController {
         model.addAttribute("tags", tagService.getAll());
         model.addAttribute("categories", categoryService.getAll());
         return "post-update";
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ObjectNotFoundException.class)
-    public ModelAndView handleObjectNotFound(ObjectNotFoundException onfe) {
-        ModelAndView modelAndView = new ModelAndView("event-not-found");
-        modelAndView.addObject("eventId", onfe.getId());
-
-        return modelAndView;
     }
 
     @PostMapping("/add")
@@ -103,7 +103,6 @@ public class PostController {
     public String updatePost(@PathVariable("id") Long id, @ModelAttribute PostSummaryDTO post) {
         Optional<PUserDetails> user = userService.getCurrentUser();
         user.ifPresent(userDetails -> postService.updatePost(post, userDetails));
-
 
         return "redirect:/posts/all";
     }

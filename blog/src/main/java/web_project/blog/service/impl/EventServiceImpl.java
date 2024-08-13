@@ -34,12 +34,19 @@ public class EventServiceImpl implements EventService {
         this.userService = userService;
     }
 
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(ApiObjectNotFoundException.class)
+//    @ResponseBody
+//    public NotFoundErrorInfo handleApiObjectNotFoundException(ApiObjectNotFoundException apiObjectNotFoundException) {
+//        return new NotFoundErrorInfo("NOT FOUND", apiObjectNotFoundException.getId());
+//    }
+
     @Override
     public EventSummaryDTO getEventDetails(Long id) {
 
         return eventRestClient
                 .get()
-                .uri("http://localhost:8081/events/{id}", id)
+                .uri("/events/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(EventSummaryDTO.class);
@@ -53,7 +60,7 @@ public class EventServiceImpl implements EventService {
 
         eventRestClient
                 .post()
-                .uri("http://localhost:8081/events")
+                .uri("/events")
                 .accept(MediaType.APPLICATION_JSON)
                 .body(addEventDTO)
                 .retrieve();
@@ -64,7 +71,7 @@ public class EventServiceImpl implements EventService {
 
         return eventRestClient
                 .get()
-                .uri("http://localhost:8081/events")
+                .uri("/events")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>(){});
@@ -74,7 +81,7 @@ public class EventServiceImpl implements EventService {
     public void deleteEvent(Long id) {
         eventRestClient
                 .delete()
-                .uri("http://localhost:8081/events/" + id)
+                .uri("/events/" + id)
                 .retrieve()
                 .toBodilessEntity();
     }
@@ -83,17 +90,10 @@ public class EventServiceImpl implements EventService {
     public void patchEvent(EventSummaryDTO summaryDTO) {
         eventRestClient
                 .patch()
-                .uri("http://localhost:8081/events/" + summaryDTO.id())
+                .uri("/events/" + summaryDTO.id())
                 .accept(MediaType.APPLICATION_JSON)
                 .body(summaryDTO)
                 .retrieve();
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ApiObjectNotFoundException.class)
-    @ResponseBody
-    public NotFoundErrorInfo handleApiObjectNotFoundException(ApiObjectNotFoundException apiObjectNotFoundException) {
-        return new NotFoundErrorInfo("NOT FOUND", apiObjectNotFoundException.getId());
     }
 
 
