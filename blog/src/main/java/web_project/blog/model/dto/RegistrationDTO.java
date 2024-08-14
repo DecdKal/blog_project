@@ -19,6 +19,9 @@ public class RegistrationDTO {
     @NotEmpty(message = "Password cannot be empty.")
     private String password;
 
+    public RegistrationDTO() {
+    }
+
     public RegistrationDTO(String username, String email, String password) {
         this.username = username;
         this.email = email;

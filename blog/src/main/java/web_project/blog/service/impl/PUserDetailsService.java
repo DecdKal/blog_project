@@ -34,6 +34,7 @@ public class PUserDetailsService implements UserDetailsService {
 
         return new PUserDetails(
                 userEntity.getUuid(),
+                userEntity.getUsername(),
                 userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.getRoles().stream().map(UserRoleEntity::getRole).map(PUserDetailsService::map).toList()
