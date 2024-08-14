@@ -28,8 +28,7 @@ public class EventController {
     @GetMapping("/all")
     public String getAllEvents(Model model) {
         model.addAttribute("events", eventService.getAllEventsSummary());
-        //return "events";
-        throw new NullPointerException();
+        return "events";
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

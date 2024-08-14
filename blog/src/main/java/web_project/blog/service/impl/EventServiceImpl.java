@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import web_project.blog.model.dto.AddEventDTO;
 import web_project.blog.model.dto.EventSummaryDTO;
@@ -18,6 +19,7 @@ import web_project.blog.model.user.PUserDetails;
 import web_project.blog.service.EventService;
 import web_project.blog.service.UserService;
 import web_project.blog.service.exception.ApiObjectNotFoundException;
+import web_project.blog.service.exception.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,12 +46,23 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventSummaryDTO getEventDetails(Long id) {
 
-        return eventRestClient
-                .get()
-                .uri("/events/{id}", id)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .body(EventSummaryDTO.class);
+//        return eventRestClient
+//                .get()
+//                .uri("/events/{id}", id)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .retrieve()
+//                .body(EventSummaryDTO.class);
+
+        try {
+            return eventRestClient
+                    .get()
+                    .uri("/events/{id}", id)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .body(EventSummaryDTO.class);
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new ObjectNotFoundException(e.getMessage(), id);
+        }
     }
 
     @Override

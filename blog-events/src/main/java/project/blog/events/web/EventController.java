@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +21,7 @@ import project.blog.events.model.dto.AddEventDTO;
 import project.blog.events.model.dto.EventDTO;
 import project.blog.events.repository.EventRepository;
 import project.blog.events.service.EventService;
+import project.blog.events.service.exception.ObjectNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +36,12 @@ public class EventController {
 
     public EventController(EventRepository eventRepository, ModelMapper modelMapper, EventService eventService) {
         this.eventService = eventService;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<EventDTO> handleObjectNotFound(ObjectNotFoundException onfe) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EventDTO());
     }
 
     @GetMapping
@@ -96,17 +104,17 @@ public class EventController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<EventDTO> deleteById(@PathVariable("id") Long id) {
+    public ResponseEntity<EventDTO> deleteById(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails) {
         eventService.deleteEvent(id);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<EventDTO> patchEvent (@PathVariable("id") Long id, @RequestBody EventDTO eventDTO) {
-        eventService.patchEvent(eventDTO);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(eventService.patchEvent(eventDTO));
     }
 
 }
