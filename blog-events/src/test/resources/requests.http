@@ -1,0 +1,11 @@
+
+POST http://localhost:8081/events
+Content-Type: application/json
+
+{
+                  "organizerEmail": "user@user.com",
+                  "name": "test entity",
+                  "description": "test",
+                  "date": "2024-12-12",
+                  "time": "05:30:00"
+                  }
