@@ -16,33 +16,33 @@
 
 <!-- Registration Form -->
 <div class="container mt-5">
-    <h2 class="text-center">Register</h2>
+    <h2 class="text-center" th:text="#{register_page_register}">Register</h2>
     <form th:action="@{/users/register}" th:object="${registerDTO}" method="post">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="form-control" th:field="*{username}" placeholder="Enter username"/>
+            <label for="username" th:text="#{register_page_username}">Username</label>
+            <input type="text" id="username" class="form-control" th:field="*{username}" th:placeholder="#{register_page_ph_username}"/>
             <small th:if="${#fields.hasErrors('username')}"
                    th:errors="*{username}" class="text-danger">Username error
             </small>
         </div>
 
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" id="email" class="form-control" th:field="*{email}" placeholder="Enter email"/>
+            <label for="email" th:text="#{register_page_email}">Email</label>
+            <input type="text" id="email" class="form-control" th:field="*{email}" th:placeholder="#{register_page_ph_email}"/>
             <small th:if="${#fields.hasErrors('email')}"
                    th:errors="*{email}" class="text-danger">Email error
             </small>
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" th:field="*{password}" placeholder="Enter password"/>
+            <label for="password" th:text="#{register_page_password}">Password</label>
+            <input type="password" id="password" class="form-control" th:field="*{password}" th:placeholder="#{register_page_ph_password}"/>
             <small th:if="${#fields.hasErrors('password')}"
                    th:errors="*{password}" class="text-danger">Password error
             </small>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        <button type="submit" class="btn btn-primary btn-block" th:text="#{register_page_register}">Register</button>
     </form>
 </div>
 

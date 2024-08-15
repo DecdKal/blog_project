@@ -15,26 +15,27 @@
 
 <!-- Login Form -->
 <div class="container mt-5">
-    <h2 class="text-center">Login</h2>
+    <h2 class="text-center" th:text="#{nav_bar_login}">Login</h2>
     <form th:action="@{/users/login}" method="post">
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" class="form-control" placeholder="Enter email" required />
+            <label for="email" th:text="#{login_page_email}">Email</label>
+            <input type="text" id="email" name="email" class="form-control" th:placeholder="#{login_page_ph_email}" required />
             <div class="text-danger" th:if="${param.error}">
                 <p>Invalid email or password.</p>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required />
+            <label for="password" th:text="#{login_page_password}">Password</label>
+            <input type="password" id="password" name="password" class="form-control" th:placeholder="#{login_page_ph_password}" required />
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        <button type="submit" class="btn btn-primary btn-block" th:text="#{login_page_login}">Login</button>
     </form>
 
     <div class="text-center mt-3">
-        <p>Don't have an account? <a class="register-link" href="/users/register">Register here</a></p>
+        <p th:text="#{login_page_no_account}">Don't have an account?</p>
+        <a class="register-link" th:text="#{login_page_register_here}" href="/users/register">Register here</a>
     </div>
 </div>
 
