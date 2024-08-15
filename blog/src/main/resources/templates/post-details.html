@@ -12,7 +12,8 @@
 <!-- Include the navigation bar -->
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'post-details'})}"></div>
 
-<div class="container mt-5">
+<div class="container mt-5 custom-container">
+    <div class="content-style">
     <!-- Post Title -->
     <h1 class="mb-4" th:text="${post.title}">Post Title</h1>
 
@@ -40,9 +41,6 @@
 
     <!-- Navigation Buttons -->
     <div class="d-flex justify-content-between">
-        <!-- Button to go back to the list of posts -->
-        <a class="btn btn-primary" th:href="@{/posts/all}" role="button">Back to Posts</a>
-
         <div>
             <a class="btn btn-warning" th:href="@{/posts/update/{id}(id=${post.id})}" role="button" th:if="${#authentication.name == post.getAuthor().getEmail()}">Edit Post</a>
             <form th:action="@{/posts/{id}(id=${post.id})}"
@@ -52,10 +50,13 @@
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger" th:if="${#authentication.name == post.getAuthor().getEmail()}">Delete Post</button>
             </form>
-
+            <!-- Button to go back to the list of posts -->
+            <a class="btn btn-primary" th:href="@{/posts/all}" role="button">Back to Posts</a>
         </div>
+    </div>
     </div>
 </div>
 
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

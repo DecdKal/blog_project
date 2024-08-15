@@ -22,7 +22,7 @@
             <div class="card-body">
                 <!-- Make the post title a hyperlink to the post details page -->
                 <h3 class="card-title">
-                    <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}">Post Title</a>
+                    <a class="title-link" th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}">Post Title</a>
                 </h3>
                 <p class="card-text">
                     <strong>Author:</strong> <span th:text="${post.author.getUsername()}">Author Name</span> <br>
@@ -45,5 +45,7 @@
         <p>No posts available.</p>
     </div>
 </div>
+
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
