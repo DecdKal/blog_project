@@ -18,7 +18,7 @@ public interface UserService {
 
     UserProfileDTO getUserByEmailAndMapToDTO(String email);
 
-    void updateUser(UserProfileDTO userProfileDTO, UserDetails userDetails);
+    void updateUser(UserProfileDTO userProfileDTO, PUserDetails userDetails);
 
 
 }

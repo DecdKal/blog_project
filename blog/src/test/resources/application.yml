@@ -1,0 +1,20 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  error:
+    include-stacktrace: always
+  port: 8081
+
+jwt:
+  secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+  expiration: ${JWT_EXPIRATION:60000}
+
+events:
+  api:
+    baseUrl: "${EVENTS_BASE_URL:http://localhost:8081}"

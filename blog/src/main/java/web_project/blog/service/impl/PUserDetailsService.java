@@ -1,10 +1,12 @@
 package web_project.blog.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import web_project.blog.model.entity.UserEntity;
 import web_project.blog.model.entity.UserRoleEntity;
 import web_project.blog.model.enums.UserRoleEnum;
@@ -12,7 +14,7 @@ import web_project.blog.model.user.PUserDetails;
 import web_project.blog.repository.UserRepository;
 
 public class PUserDetailsService implements UserDetailsService {
-
+    
     private final UserRepository userRepository;
 
     public PUserDetailsService(UserRepository userRepository) {

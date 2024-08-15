@@ -1,6 +1,7 @@
 package web_project.blog.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
@@ -18,16 +19,16 @@ public class AppConfiguration {
         return new ModelMapper();
     }
 
-    @Bean
-    public DataSourceInitializer dataSourceInitializer(DataSource dataSource, RoleRepository roleRepository, ResourceLoader loader) {
-        DataSourceInitializer initializer = new DataSourceInitializer();
-        initializer.setDataSource(dataSource);
-
-        if(roleRepository.count() == 0) {
-            ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-            populator.addScript(loader.getResource("classpath:data.sql"));
-            initializer.setDatabasePopulator(populator);
-        }
-        return initializer;
-    }
+//    @Bean
+//    public DataSourceInitializer dataSourceInitializer(DataSource dataSource, RoleRepository roleRepository, ResourceLoader loader) {
+//        DataSourceInitializer initializer = new DataSourceInitializer();
+//        initializer.setDataSource(dataSource);
+//
+//        if(roleRepository.count() == 0) {
+//            ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+//            populator.addScript(loader.getResource("classpath:data.sql"));
+//            initializer.setDatabasePopulator(populator);
+//        }
+//        return initializer;
+//    }
 }

@@ -1,6 +1,7 @@
 package web_project.blog.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import web_project.blog.model.dto.AddPostDTO;
 import web_project.blog.model.dto.PostSummaryDTO;
@@ -40,7 +41,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void createPost(AddPostDTO addPostDTO, PUserDetails userDetails) {
 
-        this.postRepository.save(map(addPostDTO,userDetails));
+        this.postRepository.save(map(addPostDTO, userDetails));
     }
 
     @Override

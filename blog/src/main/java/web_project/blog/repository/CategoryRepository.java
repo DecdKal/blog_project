@@ -5,8 +5,11 @@ import org.springframework.stereotype.Repository;
 import web_project.blog.model.entity.CategoryEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
     List<CategoryEntity> findByIdIn(List<Long> ids);
+
+    Optional<CategoryEntity> findByName(String name);
 }

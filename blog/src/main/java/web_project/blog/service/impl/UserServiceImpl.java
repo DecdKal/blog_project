@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import web_project.blog.model.dto.RegistrationDTO;
 import web_project.blog.model.dto.UserProfileDTO;
 import web_project.blog.model.entity.UserEntity;
+import web_project.blog.model.entity.UserRoleEntity;
 import web_project.blog.model.enums.UserRoleEnum;
 import web_project.blog.model.user.PUserDetails;
 import web_project.blog.repository.RoleRepository;
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserProfileDTO userProfileDTO, UserDetails userDetails) {
+    public void updateUser(UserProfileDTO userProfileDTO, PUserDetails userDetails) {
         if(Objects.equals(userDetails.getUsername(), userProfileDTO.getEmail())) {
             Optional<UserEntity> user = userRepository.findByEmail(userDetails.getUsername());
             if(user.isPresent()) {
@@ -75,6 +76,10 @@ public class UserServiceImpl implements UserService {
         UserEntity mappedEntity = modelMapper.map(registrationDTO, UserEntity.class);
 
         mappedEntity.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
+        if(roleRepository.findAll().isEmpty()) {
+            roleRepository.save(new UserRoleEntity().setRole(UserRoleEnum.USER));
+            roleRepository.save(new UserRoleEntity().setRole(UserRoleEnum.ADMIN));
+        }
         mappedEntity.setRoles(List.of(roleRepository.getUserRoleEntityByName(UserRoleEnum.USER)));
 
         return mappedEntity;
