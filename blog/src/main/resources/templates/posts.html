@@ -30,11 +30,11 @@
                 </p>
                 <p class="card-text">
                     <strong>Categories:</strong>
-                    <span th:each="category : ${post.categories}" class="badge bg-secondary me-1" th:text="${category.name}">Category Name</span>
+                    <span th:each="category : ${post.categories}" class="badge bg-secondary me-1 ktags" style="background-color: darkolivegreen !important;" th:text="${category.name}">Category Name</span>
                 </p>
                 <p class="card-text">
                     <strong>Tags:</strong>
-                    <span th:each="tag : ${post.tags}" class="badge bg-secondary me-1" th:text="${tag.name}">Tag Name</span>
+                    <span th:each="tag : ${post.tags}" class="badge bg-secondary me-1 ktags" style="background-color: darkolivegreen !important;" th:text="${tag.name}">Tag Name</span>
                 </p>
             </div>
         </div>

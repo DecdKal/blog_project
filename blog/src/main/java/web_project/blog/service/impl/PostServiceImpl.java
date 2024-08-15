@@ -10,7 +10,9 @@ import web_project.blog.model.entity.PostEntity;
 import web_project.blog.model.entity.TagEntity;
 import web_project.blog.model.entity.UserEntity;
 import web_project.blog.model.user.PUserDetails;
+import web_project.blog.repository.CategoryRepository;
 import web_project.blog.repository.PostRepository;
+import web_project.blog.repository.TagRepository;
 import web_project.blog.service.CategoryService;
 import web_project.blog.service.PostService;
 import web_project.blog.service.TagService;
@@ -18,6 +20,7 @@ import web_project.blog.service.UserService;
 import web_project.blog.service.exception.ObjectNotFoundException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,15 +30,15 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
-    private final TagService tagService;
-    private final CategoryService categoryService;
+    private final TagRepository tagRepository;
+    private final CategoryRepository categoryRepository;
 
-    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, UserService userService, TagService tagService, CategoryService categoryService) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, UserService userService, TagRepository tagRepository, CategoryRepository categoryRepository) {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
-        this.tagService = tagService;
-        this.categoryService = categoryService;
+        this.tagRepository = tagRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -84,8 +87,17 @@ public class PostServiceImpl implements PostService {
             post.setLastUpdatedOn(LocalDateTime.now());
             post.setAuthor(userEntity.get());
 
-            List<TagEntity> tags = tagService.getByIds(addPostDTO.getTags());
-            List<CategoryEntity> categories = categoryService.getByIds(addPostDTO.getCategories());
+            List<TagEntity> tags = new ArrayList<>();
+            List<CategoryEntity> categories = new ArrayList<>();
+
+            for (Long tag : addPostDTO.getTags()) {
+                Optional<TagEntity> realTag = tagRepository.findById(tag);
+                realTag.ifPresent(tags::add);
+            }
+            for (Long category : addPostDTO.getCategories()) {
+                Optional<CategoryEntity> realTag = categoryRepository.findById(category);
+                realTag.ifPresent(categories::add);
+            }
 
             post.setCategories(categories);
             post.setTags(tags);

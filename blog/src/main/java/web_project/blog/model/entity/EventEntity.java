@@ -11,10 +11,7 @@ import web_project.blog.model.validation.DateNotInThePast;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class EventEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class EventEntity extends BaseEntity{
 
     @NotEmpty
     @Email
@@ -56,15 +53,6 @@ public class EventEntity {
 
     public EventEntity setOrganizerEmail(String organizerEmail) {
         this.organizerEmail = organizerEmail;
-        return this;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public EventEntity setId(Long id) {
-        this.id = id;
         return this;
     }
 

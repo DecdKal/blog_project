@@ -2,14 +2,13 @@ package web_project.blog.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import web_project.blog.model.dto.RegistrationDTO;
 import web_project.blog.model.dto.TagDTO;
 import web_project.blog.model.entity.TagEntity;
-import web_project.blog.model.entity.UserEntity;
 import web_project.blog.repository.TagRepository;
 import web_project.blog.service.TagService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TagServiceImpl implements TagService {

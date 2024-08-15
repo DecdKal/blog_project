@@ -89,7 +89,7 @@ public class PostController {
         Optional<PUserDetails> user = userService.getCurrentUser();
         user.ifPresent(userDetails -> postService.createPost(addPostDTO, userDetails));
 
-        return "redirect:/";
+        return "redirect:/posts/all";
     }
 
     @DeleteMapping("/{id}")

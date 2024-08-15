@@ -5,25 +5,12 @@ import web_project.blog.model.enums.UserRoleEnum;
 
 @Table(name = "roles")
 @Entity
-public class UserRoleEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserRoleEntity extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private UserRoleEnum name;
 
     public UserRoleEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public UserRoleEntity setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public UserRoleEnum getRole() {

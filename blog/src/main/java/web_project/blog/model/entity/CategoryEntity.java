@@ -5,26 +5,13 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "categories")
-public class CategoryEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CategoryEntity extends BaseEntity{
 
     @NotEmpty
     private String name;
 
     @NotEmpty
     private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public CategoryEntity setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public String getName() {
         return name;

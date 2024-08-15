@@ -9,11 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "posts")
-public class PostEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PostEntity  extends BaseEntity{
 
     @NotEmpty
     private String title;
@@ -29,10 +25,10 @@ public class PostEntity {
 
     private LocalDateTime lastUpdatedOn;
 
-    @OneToMany
+    @ManyToMany
     private List<TagEntity> tags;
 
-    @OneToMany
+    @ManyToMany
     private List<CategoryEntity> categories;
 
     public List<CategoryEntity> getCategories() {
@@ -44,14 +40,6 @@ public class PostEntity {
         return this;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public PostEntity setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public String getTitle() {
         return title;
