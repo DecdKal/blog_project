@@ -14,16 +14,16 @@
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'tags-add'})}"></div>
 
 <div class="container">
-    <h2 class="mt-5">Add a New Tag</h2>
+    <h2 class="mt-5" th:text="#{tag_add}">Add a New Tag</h2>
     <form th:action="@{/tags/add}" th:method="post" th:object="${tagDTO}">
         <div class="form-group">
-            <label for="name">Tag Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter tag name" th:errorclass="is-invalid" th:field="*{name}">
+            <label for="name" th:text="#{tag_name}">Tag Name</label>
+            <input type="text" class="form-control" id="name" name="name" th:placeholder="#{tag_ph}" th:errorclass="is-invalid" th:field="*{name}">
             <small th:if="${#fields.hasErrors('name')}"
                    th:errors="*{name}" class="text-danger">Name error
             </small>
         </div>
-        <button type="submit" class="btn btn-primary">Add Tag</button>
+        <button type="submit" class="btn btn-primary" th:text="#{tag_btn}">Add Tag</button>
     </form>
 </div>
 <div th:insert="fragments/footer :: footer"></div>

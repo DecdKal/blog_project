@@ -104,13 +104,22 @@ body {
     background-color: gray;
 }
 
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    border-radius: 20px;
+    margin-top: 50px;
+    border: 2px solid darkolivegreen;
+    padding-bottom: 20px;
+}
+
 .form-builder {
     width: 100%;
     max-width: 500px;
     padding: 20px;
     border-radius: 15px;
-    margin-left: 37%;
-    margin-top: 2%;
 }
 
 .styled-form {
@@ -148,10 +157,58 @@ body {
 
 .content-style {
     padding: 22% 0% 25% 10%;
-
 }
 
 .footer-content {
     text-align: center;
     margin-top: 5%;
+}
+
+/*#lang-switcher {*/
+/*    position: relative;*/
+/*    padding-top: 5px;*/
+/*    justify-content: space-between;*/
+/*    color: white;*/
+/*    border-radius: 12px;*/
+/*}*/
+
+
+/*.lang-switcher .dropdown-menu {*/
+/*    color: gray;*/
+/*    border: none;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    border-radius: 5px;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+
+#lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px;
+}
+
+#lang-switcher label {
+    font-size: 16px;
+    color: white;
+    margin: 0;
+}
+
+/* Style for the select dropdown */
+#lang-switcher select {
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounded corners */
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Dropdown focus and hover effects */
+#lang-switcher select:hover,
+#lang-switcher select:focus {
+    border-color: #3498db; /* Blue border on hover/focus */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow on focus */
 }

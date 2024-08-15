@@ -16,7 +16,7 @@
 <body>
 
 <div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
-
+<div class="container form-container">
 <div class="form-builder">
 <h1>Add a New Blog Post</h1>
 <form class="styled-form" th:action="@{/posts/add}" method="post" th:object="${addPostDTO}">
@@ -75,6 +75,7 @@
     </div>
 
     </form>
+</div>
 </div>
 
 <script>
