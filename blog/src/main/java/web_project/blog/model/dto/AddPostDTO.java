@@ -18,7 +18,6 @@ public class AddPostDTO {
     @Size(min = 5, message = "Content must be longer than 5 letters.")
     private String content;
 
-    @NotNull
     private UserEntity author;
 
     private LocalDateTime createdOn;

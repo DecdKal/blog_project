@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/profile-style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 
  <div th:replace="~{fragments/navbar::navbar(activeLink=${'profile'})}"></div>
-
-<header>
-    <h1>Your Profile</h1>
-</header>
 
 <main class="container">
     <section>
@@ -21,27 +18,24 @@
         <form th:action="@{/profile/edit}" method="post">
             <input type="hidden" name="_method" value="patch">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" class="form-control" th:value="${user.username}" required />
-            </div>
-
-            <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" class="form-control" th:value="${user.email}" readonly />
             </div>
 
             <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" th:value="${user.username}" required />
+            </div>
+
+            <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" class="form-control" th:text="${user.description}" readonly></textarea>
+                <textarea id="description" name="description" class="form-control" th:text="${user.description}" required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </section>
 
-    <section>
-        <a href="/" class="btn btn-secondary">Home</a>
-    </section>
 </main>
 </body>
 </html>

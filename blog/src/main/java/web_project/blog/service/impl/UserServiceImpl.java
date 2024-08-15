@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService {
             Optional<UserEntity> user = userRepository.findByEmail(userDetails.getUsername());
             if(user.isPresent()) {
                 user.get().setUsername(userProfileDTO.getUsername());
+                user.get().setDescription(userProfileDTO.getDescription());
                 userRepository.save(user.get());
             }
         }
@@ -79,8 +80,10 @@ public class UserServiceImpl implements UserService {
         if(roleRepository.findAll().isEmpty()) {
             roleRepository.save(new UserRoleEntity().setRole(UserRoleEnum.USER));
             roleRepository.save(new UserRoleEntity().setRole(UserRoleEnum.ADMIN));
+            mappedEntity.setRoles(List.of(roleRepository.getUserRoleEntityByName(UserRoleEnum.USER), roleRepository.getUserRoleEntityByName(UserRoleEnum.ADMIN)));
+        } else {
+            mappedEntity.setRoles(List.of(roleRepository.getUserRoleEntityByName(UserRoleEnum.USER)));
         }
-        mappedEntity.setRoles(List.of(roleRepository.getUserRoleEntityByName(UserRoleEnum.USER)));
 
         return mappedEntity;
     }

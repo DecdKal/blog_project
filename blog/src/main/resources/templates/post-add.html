@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Add Blog Post</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <style>
         {
@@ -13,8 +14,12 @@
     </style>
 </head>
 <body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}"></div>
+
+<div class="form-builder">
 <h1>Add a New Blog Post</h1>
-<form th:action="@{/posts/add}" method="post" th:object="${addPostDTO}">
+<form class="styled-form" th:action="@{/posts/add}" method="post" th:object="${addPostDTO}">
     <!-- Title -->
     <div class="form-group">
         <label for="title">Title:</label>
@@ -69,7 +74,8 @@
         <a href="/posts/all" class="btn btn-primary">Back to All Posts</a>
     </div>
 
-</form>
+    </form>
+</div>
 
 <script>
     document.querySelectorAll('.dropdown-checkbox').forEach(function(dropdown) {

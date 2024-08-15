@@ -36,6 +36,6 @@ public class UserController {
             userService.updateUser(userProfileDTO, pUserDetails);
         });
 
-        return "redirect:/profile";
+        return "redirect:/";
     }
 }

@@ -4,6 +4,10 @@ body {
     background-color: burlywood;
     background-repeat: no-repeat;
     background-size: cover;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*height: 100vh;*/
+    /*margin: 0;*/
 }
 
 .dropdown-checkbox {
@@ -65,6 +69,51 @@ body {
     background-color: darkgreen;
 }
 
+.btn-primary {
+    background-color: darkolivegreen;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: darkgreen;
+}
+
+.btn-secondary {
+    background-color: darkolivegreen;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: darkgreen;
+}
+
 .register-link {
     color: darkgreen;
+}
+
+.dropdown-menu.show {
+    background-color: white;
+}
+
+.dropdown-item {
+    background-color: white;
+    color: black;
+}
+
+.dropdown-item:hover {
+    background-color: gray;
+}
+
+.form-builder {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 15px;
+    margin-left: 37%;
+    margin-top: 2%;
+}
+
+.styled-form {
+    display: flex;
+    flex-direction: column;
 }
