@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'event-not-found'})}"></div>
+
+
+<div class="container-fluid">
+  <h5 class="text-center mt-5"> You do not have permissions!</h5>
+</div>
+
+<div class="text-center mt-5"><a th:href="@{/}">Back to home page</a></div>
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -65,6 +65,14 @@ public class PostController {
         return modelAndView;
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ModelAndView handleUnauthorized(IllegalAccessException iae) {
+        ModelAndView modelAndView = new ModelAndView("unauthorized-action");
+
+        return modelAndView;
+    }
+
     @GetMapping("/{id}")
     public String postDetails(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", postService.getPostDetails(id));
@@ -93,9 +101,13 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public String deletePost(@PathVariable("id") Long id) {
+    public String deletePost(@PathVariable("id") Long id) throws IllegalAccessException {
         Optional<PUserDetails> user = userService.getCurrentUser();
-        user.ifPresent(userDetails -> postService.deletePost(id));
+
+        if(user.isPresent() && !postService.getPostDetails(id).getAuthor().getEmail().equals(user.get().getUsername()) ) {
+            throw new IllegalAccessException("You do not have permissions to do this action.");
+        }
+        user.ifPresent(userDetails ->postService.deletePost(id));
 
         return "redirect:/posts/all";
     }
