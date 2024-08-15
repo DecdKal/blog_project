@@ -1,0 +1,58 @@
+/* navbar-styles.css */
+.navbar-custom {
+    background-color: #556b2f; /* Green-gray color */ !important;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    margin-right: 15px; /* Add spacing between nav links */
+    color: white; /* Change text color to white */
+}
+
+.navbar-custom .navbar-brand {
+    color: white; /* Change brand text color to white */
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: burlywood;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: burlywood; /* Light gray color on hover */
+}
+
+.navbar-custom .navbar-nav .dropdown-menu {
+    background-color: #6b8e23; /* Slightly different shade for dropdown */
+}
+
+.navbar-custom .navbar-nav .dropdown-item:hover {
+    background-color: burlywood; /* Match with navbar background on hover */
+}
+
+.navbar-custom .form-inline {
+    padding-left: 15px;
+}
+
+.navbar-custom .btn-link {
+    color: white;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-custom .navbar-nav .nav-link.active {
+    color: burlywood;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.navbar-custom .form-inline .btn-link {
+    color: #ffffff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    border: none; /* Remove border */
+    background: none; /* Remove default background */
+    margin-left: 15px; /* Add some spacing */
+}
+
+/* Hover effect for logout button */
+.navbar-custom .form-inline .btn-link:hover {
+    color: burlywood; /* Light gray on hover */
+}

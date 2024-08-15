@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
@@ -33,7 +34,7 @@
     </form>
 
     <div class="text-center mt-3">
-        <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+        <p>Don't have an account? <a class="register-link" href="/users/register">Register here</a></p>
     </div>
 </div>
 
